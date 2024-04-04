@@ -23,7 +23,7 @@ from sphinx.transforms.post_transforms import SphinxPostTransform
 
 from .navigation import get_navigation_tree
 
-THEME_PATH = (Path(__file__).parent / "theme" / "furo").resolve()
+THEME_PATH = (Path(__file__).parent / "theme" / "sphinx-theme").resolve()
 
 logger = logging.getLogger(__name__)
 
@@ -377,7 +377,7 @@ def setup(app: sphinx.application.Sphinx) -> Dict[str, Any]:
         "pygments_dark_style", default="native", rebuild="env", types=[str]
     )
 
-    app.add_html_theme("furo", str(THEME_PATH))
+    app.add_html_theme("sphinx_theme", str(THEME_PATH))
 
     app.add_post_transform(WrapTableAndMathInAContainerTransform)
 

@@ -1,53 +1,56 @@
-[build-system]
-requires = ["sphinx-theme-builder >= 0.2.0a10"]
-build-backend = "sphinx_theme_builder"
+[project]
+name = "sphinx-theme"
+description = "Basic Escad Sphinx theme"
+dynamic = ["version"]
+readme = "README.md"
+
+license = { file = "LICENSE" }
+authors = [{ name = "Martin Heubuch", email = "martin.heubuch@escad.de" }]
+
+[tool.poetry]
+name = "sphinx-theme"
+version = "0.1.0"
+description = "Basic Escad Sphinx theme"
+authors = ["heubuchm <martin.heubuch@escad.de>"]
+readme = "README.md"
+packages = [{include = "sphinx_theme", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+beautifulsoup4 = "^4.12.3"
+Sphinx = ">=6.0"
+sphinx-basic-ng = "^1.0.0b2"
+Pygments = ">=2.7"
+myst-parser = "^2.0.0"
+sphinx-copybutton = "^0.5.2"
+sphinx-design = "^0.5.0"
+sphinx-inline-tabs = "^2023.4.21"
+furo = "^2024.1.29"
+pydata-sphinx-theme = "^0.15.2"
+
+[tool.poetry.group.dev.dependencies]
+sphinx-theme-builder = {extras = ["cli"], version = "^0.2.0b2"}
+nox = "^2023.4.22"
+pytest-playwright = "^0.4.4"
+httpx = "^0.26.0"
+tomli = "^2.0.1"
+weasyprint = "^61.0"
+
+
+[tool.poetry.plugins."sphinx.html_themes"]
+sphinx_theme = "sphinx_theme"
 
 [tool.sphinx-theme-builder]
 node-version = "18.16.0"
 additional-compiled-static-assets = ["styles/furo-extensions.css"]
 
-[project]
-name = "furo"
-description = "A clean customisable Sphinx documentation theme."
-dynamic = ["version"]
-readme = "README.md"
-
-requires-python = ">=3.8"
-dependencies = [
-  "beautifulsoup4",
-  "sphinx >= 6.0,<8.0",
-  "sphinx-basic-ng",
-  "pygments >= 2.7",
-]
-
-license = { file = "LICENSE" }
-authors = [{ name = "Pradyun Gedam", email = "mail@pradyunsg.me" }]
-classifiers = [
-  "Framework :: Sphinx",
-  "Framework :: Sphinx :: Theme",
-  "Development Status :: 5 - Production/Stable",
-  "License :: OSI Approved :: MIT License",
-  "Environment :: Web Environment",
-  "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Operating System :: OS Independent",
-  "Topic :: Documentation",
-  "Topic :: Software Development :: Documentation",
-]
-
-[project.entry-points]
-"sphinx.html_themes" = { furo = "furo" }
-
-[project.urls]
-GitHub = "https://github.com/pradyunsg/furo"
 
 [tool.mypy]
 strict = true
 
 [tool.ruff]
 ignore = ["E501"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -7,7 +7,7 @@ import os
 
 import nox
 
-PACKAGE_NAME = "furo"
+PACKAGE_NAME = "sphinx-theme"
 nox.options.sessions = ["lint", "test"]
 
 

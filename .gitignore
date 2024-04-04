@@ -7,3 +7,7 @@ node_modules
 /build
 /dist
 __pycache__
+
+
+tests/sites/base/_build*
+

@@ -5,15 +5,15 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
   devtool: "source-map",
   entry: {
-    furo: [
-      "./src/furo/assets/scripts/furo.js",
-      "./src/furo/assets/styles/furo.sass",
+    "sphinx-theme": [
+      "./src/sphinx_theme/assets/scripts/sphinx-theme.js",
+      "./src/sphinx_theme/assets/styles/sphinx-theme.sass",
     ],
-    "furo-extensions": ["./src/furo/assets/styles/furo-extensions.sass"],
+    "sphinx-theme-extensions": ["./src/sphinx_theme/assets/styles/sphinx-theme-extensions.sass"],
   },
   output: {
     filename: "scripts/[name].js",
-    path: resolve(__dirname, "src/furo/theme/furo/static"),
+    path: resolve(__dirname, "src/sphinx_theme/theme/sphinx-theme/static"),
   },
   plugins: [new MiniCssExtractPlugin({ filename: "styles/[name].css" })],
   optimization: { minimizer: [`...`, new CssMinimizerPlugin()] },
@@ -27,6 +27,10 @@ module.exports = {
           { loader: "postcss-loader", options: { sourceMap: true } },
           { loader: "sass-loader", options: { sourceMap: true } },
         ],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
     ],
   },
