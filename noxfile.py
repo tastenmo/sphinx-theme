@@ -6,6 +6,7 @@ import glob
 import os
 
 import nox
+from nox_poetry import session
 
 PACKAGE_NAME = "sphinx-theme"
 nox.options.sessions = ["lint", "test"]
@@ -65,31 +66,33 @@ def get_release_versions(version_file):
 #
 # Development Sessions
 #
-@nox.session
+@session(python=["3.11"])
 def docs(session):
     session.install("-r", "docs/requirements.txt")
     session.install(".")
-
+#    session.run('poetry', 'shell')
+#    session.run('poetry', 'install')
     # Generate documentation into `build/docs`
     session.run("sphinx-build", "-b", "dirhtml", "-v", "docs/", "build/docs")
 
 
-@nox.session(name="docs-live")
+@session(python=["3.11"])
 def docs_live(session):
     session.install("-r", "docs/requirements.txt")
-    session.install("-e", ".", "sphinx-theme-builder[cli]")
+#    session.install(".")
+    session.install("sphinx-theme-builder[cli]", ".")
 
     # Generate documentation into `build/docs`
     session.run("stb", "serve", "docs/", *session.posargs)
 
 
-@nox.session
+@session(python=["3.11"])
 def lint(session):
     session.notify("lint-pre-commit")
     session.notify("lint-mypy")
 
 
-@nox.session(name="lint-pre-commit")
+@session(python=["3.11"])
 def lint_pre_commit(session):
     session.install("pre-commit")
 
@@ -101,7 +104,7 @@ def lint_pre_commit(session):
     session.run("pre-commit", "run", *args)
 
 
-@nox.session(name="lint-mypy")
+@session(python=["3.11"])
 def lint_mypy(session):
     session.install(
         "-e", ".", "mypy", "types-docutils", "types-Pygments", "types-beautifulsoup4"
@@ -109,7 +112,7 @@ def lint_mypy(session):
     session.run("mypy", "src")
 
 
-@nox.session
+@session(python=["3.11"])
 def test(session):
     session.install("-e", ".", "-r", "tests/requirements.txt")
 
@@ -122,7 +125,7 @@ def test(session):
     session.run("pytest", *args)
 
 
-@nox.session
+@session(python=["3.11"])
 def release(session):
     version_file = f"src/{PACKAGE_NAME}/__init__.py"
     allowed_upstreams = [

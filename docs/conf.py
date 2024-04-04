@@ -72,6 +72,7 @@ myst_heading_anchors = 3
 
 html_theme = "sphinx_theme"
 html_title = "basic sphinx theme"
+html_logo = "_static/REscad.svg"
 language = "en"
 
 html_static_path = ["_static"]
@@ -94,6 +95,17 @@ html_theme_options: Dict[str, Any] = {
     "source_branch": "main",
     "source_directory": "docs/",
 }
+
+html_sidebars = {
+    "**": ["sidebar/scroll-start.html",
+#        "sidebar/brand.html",
+        "sidebar/search.html",
+        "sidebar/navigation.html",
+#        "sidebar/ethical-ads.html",
+        "sidebar/scroll-end.html",],
+        
+        }
+
 
 if "READTHEDOCS" in os.environ:
     html_theme_options["announcement"] = (

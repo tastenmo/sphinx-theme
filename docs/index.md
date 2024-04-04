@@ -2,7 +2,7 @@
 hide-toc: true
 ---
 
-# Furo
+# basic sphinx theme
 
 A clean customisable Sphinx documentation theme.
 

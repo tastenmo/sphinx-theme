@@ -29,6 +29,7 @@
 
 <div class="page">
   <header class="page-header">
+    <div class="page-header-left">
     
         {% block brand_content %}
         {%- if logo_url %}
@@ -42,6 +43,8 @@
           <img class="page-header-logo only-dark" src="{{ pathto('_static/' + theme_dark_logo, 1) }}" alt="Dark Logo"/>
         </a>
         {%- endif %}
+    </div>
+    
         {% if not theme_sidebar_hide_name %}
         <span class="page-header-brand-text">{{ docstitle if docstitle else project }}</span>
         {%- endif %}
