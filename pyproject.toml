@@ -26,7 +26,7 @@ sphinx-copybutton = "^0.5.2"
 sphinx-design = "^0.5.0"
 sphinx-inline-tabs = "^2023.4.21"
 furo = "^2024.1.29"
-pydata-sphinx-theme = "^0.15.2"
+pydata-sphinx-theme = "^0.14.3"
 
 [tool.poetry.group.dev.dependencies]
 sphinx-theme-builder = {extras = ["cli"], version = "^0.2.0b2"}
