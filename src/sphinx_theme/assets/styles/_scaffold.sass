@@ -35,6 +35,8 @@ html
     background-color: var(--color-foreground-border)
     border-radius: 0.125rem
 
+body
+  display: flex
 //
 // Overalls
 //
@@ -66,54 +68,120 @@ article
   overflow-wrap: break-word
 
 .page
-  display: flex
-  flex-direction: column
+  display: grid
   // fill the viewport for pages with little content.
-  min-height: 100%
+  height: 100vh
+  background: var(--color-header-background)
+  grid-template-columns: $sidebar-width 1fr $sidebar-width
+  grid-template-areas: "header_left header_center header_right" "sidebar content toc" "footer footer footer"
 
 .page-header
+  //display: flex
+  //align-items: stretch
+  
+  //flex-shrink: 0
+  padding: 0 var(--header-padding)
+  position: fixed
+  width: 100%
+  z-index: 10
+
+  //background: var(--color-header-background)
+  //box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25)
+
+.page-header-column
+  //overflow-y: auto
+  box-sizing: border-box
   display: flex
+  justify-content: flex-start
+  align-items: stretch
+  flex-wrap: nowrap
   flex-direction: row
-  justify-content: space-around
-  align-items: center
 
-  background: var(--color-header-background)
+#page-header-left
+  grid-area: header_left
+  position: sticky
 
+
+  .page-header-logo-container
+    margin: var(--sidebar-item-spacing-vertical) var(--sidebar-item-spacing-horizontal)
+    svg
+      height: 40px
+ 
+
+.logo
+  display: inline-block
+  height: 27px
+  max-width: 100%
+  svg
+    width: 100%
+    height: 100%
+
+.logo-small
+  background: url('../images/Roosh.svg') no-repeat
+  background-size: contain
+  height: 40px
+
+.logo-large
+  background-image: url(../images/REscad.svg) no-repeat
+  background-size: auto
+  height: 40px
+
+#page-header-center
+  display: flex
+  grid-area: header_center
+  position: relative
+  margin: auto auto auto 2rem
+ 
   .pageheader-brand-text
     color: var(--color-sidebar-brand-text)
     overflow-wrap: break-word
     margin: var(--sidebar-item-spacing-vertical) 0
     font-size: 1.5rem
 
-  .page-header-logo-container
-    margin: var(--sidebar-item-spacing-vertical) 0
-
-  .page-header-logo
-    margin: 0 auto
-    display: block
-    max-width: 100%
-    height: 40px
-
-  .page-header-left,
-  .page-header-right
+#page-header-right
     display: flex
-    height: var(--header-height)
+    position: sticky
+    grid-area: header_right
     padding: 0 var(--header-padding)
     label
       height: 100%
       width: 100%
       user-select: none
 
-.page-body
+
+#page-left
+  position: sticky
+  grid-area: sidebar
+  scroll-behavior: smooth
+
+#page-content
   display: flex
-  flex-direction: row
+  grid-area: content
 
+  position: relative
+  overflow-y: auto
+  z-index: 100
+  background: var(--color-background-primary)
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.25)
 
+#page-right
+  position: sticky
+  grid-area: toc
+
+.page-column
+  //overflow-y: auto
+  box-sizing: border-box
+  display: flex
+  justify-content: flex-start
+  align-items: stretch
+  flex-wrap: nowrap
+  flex-direction: column
 .page-footer
   display: flex
   flex-direction: row
   justify-content: space-around
   align-items: baseline
+  grid-area: footer
 
   .page-footer-left,
   .page-footer-right
@@ -174,7 +242,7 @@ article
 
 // Central items.
 .content
-  padding: 0 $content-padding
+  padding: $content-padding
 //  width: $content-width
   width: 100%
 
@@ -372,11 +440,15 @@ article
 // Responsive layouting
 ////////////////////////////////////////////////////////////////////////////////
 // Make things a bit bigger on bigger screens.
-@media (min-width: $full-width + $sidebar-width)
+@media screen and (min-width: $full-width + $sidebar-width)
   html
     font-size: 110%
 
-@media (max-width: $full-width)
+@media screen and (max-width: $full-width)
+
+  .page 
+    grid-template-columns: $sidebar-width 1fr 30px
+
   // Collapse "toc" into the icon.
   .toc-content-icon
     display: flex
@@ -394,7 +466,7 @@ article
   .sidebar-drawer
     width: calc((100% - #{$full-width - $sidebar-width}) / 2 + #{$sidebar-width})
 
-@media (max-width: $full-width - $sidebar-width)
+@media screen and (max-width: $full-width - $sidebar-width)
   // Collapse "navigation".
   .nav-overlay-icon
     display: flex
@@ -435,13 +507,13 @@ article
     margin-left: auto
     margin-right: auto
 
-@media (max-width: $content-width + 2* $content-padding)
+@media screen and  (max-width: $content-width + 2* $content-padding)
   // Content should respect window limits.
   .content
     width: 100%
     overflow-x: auto
 
-@media (max-width: $content-width)
+@media screen and  (max-width: $content-width)
   .content
     padding: 0 $content-padding--small
     // Don't float sidebars to the right.

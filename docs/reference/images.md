@@ -2,6 +2,13 @@
 
 Images can be a great supplement to technical documentation text. Sphinx provides control for their alignment in the content, as well as the ability to add captions.
 
+
+```{image} ../_static/Logo_ESCAD_mTag_E_RGB.png
+:align: center
+```
+
+
+
 ## Basic Usage
 
 ```{furo-demo}

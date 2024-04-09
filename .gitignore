@@ -10,4 +10,5 @@ __pycache__
 
 
 tests/sites/base/_build*
+docs/_build*
 

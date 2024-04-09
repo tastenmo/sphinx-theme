@@ -19,7 +19,7 @@ def determine_matching_sphinx_versions() -> Iterable[str]:
     pyproject_toml = (REPO_ROOT_DIR / "pyproject.toml").read_text()
 
     parsed = tomli.loads(pyproject_toml)
-    for dependency in parsed["project"]["dependencies"]:
+    for dependency in parsed["tool.poetry.dependencies"]:
         if dependency.lower().startswith("sphinx "):
             break
     else:

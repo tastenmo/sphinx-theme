@@ -114,7 +114,7 @@ def lint_mypy(session):
 
 @session(python=["3.11"])
 def test(session):
-    session.install("-e", ".", "-r", "tests/requirements.txt")
+    session.install(".", "-r", "tests/requirements.txt")
 
     args = session.posargs or [
         "-n=auto",
